@@ -2,15 +2,17 @@ package com.example;
 
 import com.example.model.Greeting;
 import com.example.model.User;
+import com.example.model.UserInvocation;
 import com.microsoft.azure.functions.*;
 import com.microsoft.azure.functions.annotation.AuthorizationLevel;
 import com.microsoft.azure.functions.annotation.FunctionName;
 import com.microsoft.azure.functions.annotation.HttpTrigger;
+import com.microsoft.azure.functions.annotation.TimerTrigger;
 import org.springframework.cloud.function.adapter.azure.FunctionInvoker;
 
 import java.util.Optional;
 
-public class HelloHandler extends FunctionInvoker<User, Greeting> {
+public class HelloHandler extends FunctionInvoker<UserInvocation, User> {
 
     @FunctionName("hello")
     public HttpResponseMessage execute(
@@ -22,10 +24,17 @@ public class HelloHandler extends FunctionInvoker<User, Greeting> {
                         request.getQueryParameters()
                                 .getOrDefault("name", "world")));
         context.getLogger().info("Greeting user name: " + user.getName());
+
+        UserInvocation userInvocation=new UserInvocation(request.getHttpMethod().name(), user);
         return request
                 .createResponseBuilder(HttpStatus.OK)
-                .body(handleRequest(user, context))
+                .body(handleRequest(userInvocation, context))
                 .header("Content-Type", "application/json")
                 .build();
+    }
+
+    @FunctionName("timer")
+    public void timer(@TimerTrigger(name = "timer", schedule = "0 */5 * * * *") String timerInfo,  ExecutionContext context){
+        context.getLogger().info("Timer is triggered: " + timerInfo);
     }
 }
