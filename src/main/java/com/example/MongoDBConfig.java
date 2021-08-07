@@ -2,19 +2,22 @@ package com.example;
 
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.SimpleMongoClientDatabaseFactory;
-import org.springframework.stereotype.Component;
 
 @Configuration
 public class MongoDBConfig {
 
+    @Value("${MONGODB_CONNECTION}")
+    String mongoConnectionString;
+
     @Bean
     public MongoClient mongoClient(){
 
-        return MongoClients.create("mongodb://jd-mongodb:6DMXe53uFrFcSWJo3YSZRJDn1VFYUKUCYfiQFbv6yuIifMnlWdl3hIyVoY5DtNlDnxjnNUEcyIsxHWq39b8XGA==@jd-mongodb.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&replicaSet=globaldb&minpoolsize=2&maxIdleTimeMS=3600000&appName=@jd-mongodb@");
+        return MongoClients.create(mongoConnectionString);
     }
 
     @Bean
