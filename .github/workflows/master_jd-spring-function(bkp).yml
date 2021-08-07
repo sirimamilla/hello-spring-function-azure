@@ -12,17 +12,17 @@ on:
 env:
   AZURE_FUNCTIONAPP_NAME: jd-spring-function(bkp) # set this to your function app name on Azure
   PACKAGE_DIRECTORY: '.' # set this to the directory which contains pom.xml file
-  JAVA_VERSION: '11' # set this to the java version to use
+  JAVA_VERSION: '1.8' # set this to the java version to use
 
 jobs:
   build-and-deploy:
     runs-on: windows-latest
     steps:
     - name: 'Checkout GitHub Action'
-      uses: actions/checkout@main
+      uses: actions/checkout@v1
 
     - name: Setup Java Sdk ${{ env.JAVA_VERSION }}
-      uses: actions/setup-java@main
+      uses: actions/setup-java@v1
       with:
         java-version: ${{ env.JAVA_VERSION }}
 
