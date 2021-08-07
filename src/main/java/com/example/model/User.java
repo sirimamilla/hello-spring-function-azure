@@ -10,7 +10,7 @@ public class User {
     private String name;
     private String place;
     private Date date=new Date();
-    private String hostName="test";
+    private String hostName="test1";
 
     public Date getDate() {
         return date;
