@@ -38,6 +38,6 @@ jobs:
       with:
         app-name: 'jd-spring-function'
         slot-name: 'bkp'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_9a6a707a46ee4f5f8c77b781bfa8563b }}
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_76696b429b4a40f1a4e752b0e6b9e121 }}
         package: '${{ env.PACKAGE_DIRECTORY }}'
         respect-pom-xml: true
