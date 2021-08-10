@@ -11,7 +11,7 @@ import org.springframework.data.mongodb.core.SimpleMongoClientDatabaseFactory;
 @Configuration
 public class MongoDBConfig {
 
-    @Value("${MONGODB_CONNECTION}")
+    @Value("${CUSTOMCONNSTR_MONGODB_CONNECTION}")
     String mongoConnectionString;
 
     @Bean
