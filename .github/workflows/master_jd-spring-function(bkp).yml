@@ -30,6 +30,7 @@ jobs:
       shell: pwsh
       env:
         MONGODB_CONNECTION: ${{ secrets.MONGODB_CONNECTION }}
+        CUSTOMCONNSTR_MONGODB_CONNECTION: ${{ secrets.CUSTOMCONNSTR_MONGODB_CONNECTION }}
       run: |
         pushd './${{ env.PACKAGE_DIRECTORY }}'
         mvn clean package
